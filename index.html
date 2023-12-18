@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive sidebar</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Optional: Include your own styles -->
+    <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital@1&family=Poppins:ital,wght@1,500&display=swap');
+
+    body {
+            font-family: 'Noto Sans, sans-serif';
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #sidebar {
+            height: 100%;
+            max-width: 200px;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgb(29, 32, 29);
+            padding-top: 20px;
+            color: white;
+        }
+        #sidebar a:hover {
+            color: black;
+            background-color: gray;
+        }
+        .table{
+            border: 2px solid black;
+        }
+        .table thead>tr>th {
+            background-color: lightslategrey;
+        }
+        #content {
+            margin-left: 200px;
+            padding: 20px;
+            transition: margin-left 0.5s;
+        }
+        
+
+        @media (max-width: 768px) {
+            #sidebar {
+                width: 100px;  
+            }
+            #sidebar h2{
+              font-size: 15px;
+            }
+            #sidebar ul li a{
+              font-size: 12px;
+            }
+            #content {
+                margin-left: 100px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+<!--Sidebar -->
+<div id="sidebar">
+    <h2 class="text-center">SideNavbar</h2>
+    <ul class="nav flex-column text-center">
+        <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Analytics</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Groups</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Settings</a></li>
+    </ul>
+</div>
+
+<!-- main -->
+<div id="content">
+    <h3>Pie Chart</h3>
+    
+    <div class="card">
+        <div class="card-body">
+            <!-- canvas to  pie chart -->
+            <canvas id="chartjs-pie" width="300" height="300"></canvas>
+        </div>
+    </div>
+
+    <!-- Analytic Values -->
+    <h3 style="margin-top: 20px;">Analytic Values</h3>
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body" style="border: 1px solid black;">
+          <h6 class="card-title">Total Vacancy</h6>
+          <p class="card-text">1000</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body"  style="border: 1px solid black;">
+          <h6 class="card-title">Candidates Selected</h6>
+          <p class="card-text">500</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body"  style="border: 1px solid black;">
+          <h6 class="card-title">Candidates Applied</h6>
+          <p class="card-text">800</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Table -->
+  <div class="row mt-4 table-responsive">
+    <div class="col-md-12 table-responsive">
+      <h3>Data Table</h3>
+      <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">S.NO</th>
+            <th scope="col">Name</th>
+            <th scope="col">Position</th>
+            <th scope="col">Salary</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1.</th>
+            <td>Abc</td>
+            <td>Wordpress Developer</td>
+            <td>20,000</td>
+          </tr>
+          <tr>
+            <th scope="row">2.</th>
+            <td>Xyz</td>
+            <td>UX Developer</td>
+            <td>30,000</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    new Chart(document.getElementById("chartjs-pie"), {
+        type: "pie",
+        data: {
+            labels: ['TotalVacancy', 'CandidatesApplied', 'CandidatesSelected'],
+            datasets: [{
+                data: [1000,800,500],
+                backgroundColor: ['rgba(0,123,255,0.9)', 'rgba(40,167,69,0.9)', 'rgba(255,193,7,0.9)'],
+                borderColor: "transparent"
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            cutoutPercentage: 65,
+        }
+    });
+</script>
+</body>
+</html>
